@@ -1,37 +1,28 @@
-import { Tabs } from 'expo-router';
-import React from 'react';
+import { View, Text } from 'react-native'
+import React from 'react'
+import { Tabs } from 'expo-router'
+import { Ionicons } from '@expo/vector-icons';
 
-import { TabBarIcon } from '@/components/navigation/TabBarIcon';
-import { Colors } from '@/constants/Colors';
-import { useColorScheme } from '@/hooks/useColorScheme';
-
-export default function TabLayout() {
-  const colorScheme = useColorScheme();
-
+const TabsLayout: React.FC = () => {
   return (
-    <Tabs
-      screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
-        headerShown: false,
-      }}>
-      <Tabs.Screen
-        name="index"
-        options={{
-          title: 'Home',
-          tabBarIcon: ({ color, focused }) => (
-            <TabBarIcon name={focused ? 'home' : 'home-outline'} color={color} />
-          ),
-        }}
-      />
-      <Tabs.Screen
-        name="explore"
-        options={{
-          title: 'Explore',
-          tabBarIcon: ({ color, focused }) => (
-            <TabBarIcon name={focused ? 'code-slash' : 'code-slash-outline'} color={color} />
-          ),
+    <Tabs>
+      <Tabs.Screen name="good" options={{ title: 'Good' , headerShown: false}}/>
+      <Tabs.Screen name="bad" options={{ title: 'Bad' , headerShown: false}}/>
+      <Tabs.Screen 
+        name="stats" 
+        options={{ 
+          title: 'Stats', 
+          headerShown: false,
+          tabBarIcon: ({color, focused}) => 
+            <Ionicons 
+              name={focused ? 'stats-chart' : 'stats-chart-outline'} 
+              color={color} 
+              size={24}
+            />
         }}
       />
     </Tabs>
-  );
+  )
 }
+
+export default TabsLayout

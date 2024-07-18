@@ -4,18 +4,18 @@ import { Ionicons } from "@expo/vector-icons";
 
 import { useBadHabbits } from "@/store/store";
 import { useState } from "react";
+import { useModals } from "@/store/store";
 
 interface IAddHabbit {
   type: string;
-  isAddHabbitVisible: boolean;
-  setIsAddHabbitVisible: (isAddHabbitVisible: boolean) => void;
 }
 
-const AddHabbit: React.FC<IAddHabbit> = ({
+const AddHabbitModal: React.FC<IAddHabbit> = ({
   type,
-  isAddHabbitVisible,
-  setIsAddHabbitVisible,
 }) => {
+  const isAddHabbitVisible = useModals((state) => state.isAddHabbitVisible);
+  const setIsAddHabbitVisible = useModals((state) => state.setIsAddHabbitVisible);
+
   const addHabbit =
     type === "bad"
       ? useBadHabbits((state) => state.addBadHabbit)
@@ -90,4 +90,4 @@ const AddHabbit: React.FC<IAddHabbit> = ({
   );
 };
 
-export default AddHabbit;
+export default AddHabbitModal;

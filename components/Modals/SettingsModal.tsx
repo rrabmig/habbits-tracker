@@ -1,13 +1,17 @@
 import { View, Text, Modal, Pressable } from 'react-native'
 import { Ionicons } from '@expo/vector-icons'
 import React from 'react'
+import { useModals } from '@/store/store'
 
 interface ISettings {
-    isSettingsVisible: boolean
-    setIsSettingsVisible: (isSettingsVisible: boolean) => void
+
 }
 
-const Settings: React.FC<ISettings> = ({isSettingsVisible, setIsSettingsVisible}) => {
+const SettingsModal: React.FC<ISettings> = () => {
+
+    const isSettingsVisible = useModals((state) => state.isSettingsVisible);
+    const setIsSettingsVisible = useModals((state) => state.setIsSettingsVisible);
+
   return (
     <Modal 
         visible={isSettingsVisible} 
@@ -35,4 +39,4 @@ const Settings: React.FC<ISettings> = ({isSettingsVisible, setIsSettingsVisible}
   )
 }
 
-export default Settings
+export default SettingsModal

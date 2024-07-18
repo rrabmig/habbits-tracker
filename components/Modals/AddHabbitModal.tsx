@@ -2,7 +2,7 @@ import { View, Text, Modal, Pressable, TextInput } from "react-native";
 import React from "react";
 import { Ionicons } from "@expo/vector-icons";
 
-import { useBadHabbits } from "@/store/store";
+import { useBadHabbits, useGoodHabbits } from "@/store/store";
 import { useState } from "react";
 import { useModals } from "@/store/store";
 
@@ -19,13 +19,12 @@ const AddHabbitModal: React.FC<IAddHabbit> = ({
   const addHabbit =
     type === "bad"
       ? useBadHabbits((state) => state.addBadHabbit)
-      : useBadHabbits((state) => state.addBadHabbit);
-  //todo: make it for good habbits
+      : useGoodHabbits((state) => state.addGoodHabbit);
 
   const [title, setTitle] = useState<string>("");
   const [description, setDescription] = useState<string>("");
 
-  const onSubmit = () => {
+  const onSubmit = (): void => {
     if (title === "") return;
     addHabbit({
       id: Date.now(),

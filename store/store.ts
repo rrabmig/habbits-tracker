@@ -1,6 +1,15 @@
 import { create } from "zustand";
-import bad from "../data/bad.json";
-import good from "../data/good.json";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import {
+  addBadHabbit,
+  decreaseBadHabbitCount,
+  increaseBadHabbitCount,
+  removeBadHabbit,
+  addGoodHabbit,
+  decreaseGoodHabbitCount,
+  increaseGoodHabbitCount,
+  removeGoodHabbit,
+} from "@/data/LocalDatabase";
 
 /**
  * Represents a Habbit object.
@@ -25,13 +34,15 @@ export type Habbit = {
 };
 
 /*
- * The global state for list of users bad habbits, obtained from a JSON file.
+ * The global state for list of users bad habbits.
  *
  * This store is used to manage the state of the list of bad habbits.
  * it provides methods to add, remove, increase and decrease the count of the bad habbits.
+ * it also syncronizes the state with an SQLite local database.
  */
 interface IBadHabbits {
   badHabbits: Habbit[];
+  setBadHabbits: (badHabbits: Habbit[]) => void;
   addBadHabbit: (badHabbit: Habbit) => void;
   removeBadHabbit: (badHabbitId: number) => void;
   increaseBadHabbitCount: (badHabbitId: number) => void;
@@ -39,11 +50,15 @@ interface IBadHabbits {
 }
 
 export const useBadHabbits = create<IBadHabbits>((set) => ({
-  badHabbits: bad,
+  badHabbits: [],
+  setBadHabbits: (badHabbits: Habbit[]) => {
+    set({ badHabbits });
+  },
   addBadHabbit: (badHabbit: Habbit) => {
     set((state) => ({
       badHabbits: [...state.badHabbits, badHabbit],
     }));
+    addBadHabbit(badHabbit);
   },
   removeBadHabbit: (badHabbitId) => {
     set((state) => ({
@@ -51,6 +66,7 @@ export const useBadHabbits = create<IBadHabbits>((set) => ({
         (badHabbit) => badHabbit.id !== badHabbitId
       ),
     }));
+    removeBadHabbit(badHabbitId);
   },
   increaseBadHabbitCount: (badHabbitId) => {
     set((state) => ({
@@ -65,6 +81,7 @@ export const useBadHabbits = create<IBadHabbits>((set) => ({
         return badHabbit;
       }),
     }));
+    increaseBadHabbitCount(badHabbitId);
   },
   decreaseBadHabbitCount: (badHabbitId) => {
     set((state) => ({
@@ -75,9 +92,76 @@ export const useBadHabbits = create<IBadHabbits>((set) => ({
             count: Math.max(0, badHabbit.count - 1),
           };
         }
+        decreaseBadHabbitCount(badHabbitId);
         return badHabbit;
       }),
     }));
+  },
+}));
+
+/*
+ * The global state for list of users good habbits.
+ *
+ * This store is used to manage the state of the list of bad habbits.
+ * it provides methods to add, remove, increase and decrease the count of the bad habbits.
+ * it also syncronizes the state with an SQLite local database.
+ */
+
+interface IGoodHabbits {
+  goodHabbits: Habbit[];
+  setGoodHabbits: (goodHabbits: Habbit[]) => void;
+  addGoodHabbit: (goodHabbit: Habbit) => void;
+  removeGoodHabbit: (goodHabbitId: number) => void;
+  increaseGoodHabbitCount: (goodHabbitId: number) => void;
+  decreaseGoodHabbitCount: (goodHabbitId: number) => void;
+}
+
+export const useGoodHabbits = create<IGoodHabbits>((set) => ({
+  goodHabbits: [],
+  setGoodHabbits: (goodHabbits: Habbit[]) => {
+    set({ goodHabbits });
+  },
+  addGoodHabbit: (goodHabbit: Habbit) => {
+    set((state) => ({
+      goodHabbits: [...state.goodHabbits, goodHabbit],
+    }));
+    addGoodHabbit(goodHabbit);
+  },
+  removeGoodHabbit: (goodHabbitId) => {
+    set((state) => ({
+      goodHabbits: state.goodHabbits.filter(
+        (goodHabbit) => goodHabbit.id !== goodHabbitId
+      ),
+    }));
+    removeGoodHabbit(goodHabbitId);
+  },
+  increaseGoodHabbitCount: (goodHabbitId) => {
+    set((state) => ({
+      goodHabbits: state.goodHabbits.map((goodHabbit) => {
+        if (goodHabbit.id === goodHabbitId) {
+          return {
+            ...goodHabbit,
+            count: goodHabbit.count + 1,
+          };
+        }
+        return goodHabbit;
+      }),
+    }));
+    increaseGoodHabbitCount(goodHabbitId);
+  },
+  decreaseGoodHabbitCount: (goodHabbitId) => {
+    set((state) => ({
+      goodHabbits: state.goodHabbits.map((goodHabbit) => {
+        if (goodHabbit.id === goodHabbitId) {
+          return {
+            ...goodHabbit,
+            count: Math.max(0, goodHabbit.count - 1),
+          };
+        }
+        return goodHabbit;
+      }),
+    }));
+    decreaseGoodHabbitCount(goodHabbitId);
   },
 }));
 
@@ -107,17 +191,24 @@ export const useModals = create<IUseModals>((set) => ({
 }));
 
 /*
- * The global state for the app's logged-in status.
+ * The global state for user information, obtained from an async storage.
  *
  * This store is used to determine if the user is logged in, and to update
  * the state if the user logs in or logs out.
  */
-interface IUseLoggedIn {
-  isLoggedIn: boolean;
-  setIsLoggedIn: (isLoggedIn: boolean) => void;
+
+export interface IUserInfo {
+  isWelcomed: boolean;
+  setIsWelcomed: (isWelcomed: boolean) => void;
 }
 
-export const useLoggedIn = create<IUseLoggedIn>((set) => ({
-  isLoggedIn: false,
-  setIsLoggedIn: (isLoggedIn) => set(() => ({ isLoggedIn })),
-}));
+export const useUserInfo = create<IUserInfo>((set) => {
+  return {
+    isWelcomed: false,
+    setIsWelcomed: (isWelcomed: boolean) =>
+      set(() => {
+        AsyncStorage.setItem("isWelcomed", isWelcomed ? "true" : "false");
+        return { isWelcomed };
+      }),
+  };
+});

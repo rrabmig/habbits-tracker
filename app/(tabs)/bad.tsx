@@ -19,7 +19,7 @@ const Bad = () => {
   return (
     <SafeAreaView className="h-full">
       <TitleAndSettings title="Bad habbits" />
-      <AddHabbitModal type="bad"/>
+      <AddHabbitModal type="bad" />
       <ScrollView
         contentContainerStyle={{ height: "100%" }}
         scrollEnabled={true}

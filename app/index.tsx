@@ -2,17 +2,17 @@ import { Pressable, Text, Touchable, View } from "react-native";
 import { Redirect, router } from "expo-router";
 import { ScrollView } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-
-import { useLoggedIn } from "@/store/store";
+import { useEffect, useState } from "react";
+import { useUserInfo } from "@/store/store";
 
 export default function WelcomePage() {
-  const isLoggedIn = useLoggedIn((state) => state.isLoggedIn);
-  const setIsLoggedIn = useLoggedIn((state) => state.setIsLoggedIn);
+  const isWelcomed = useUserInfo((state) => state.isWelcomed);
+  const setIsLoggedIn = useUserInfo((state) => state.setIsWelcomed);
 
-  if (isLoggedIn) {
+  if (isWelcomed) {
     return <Redirect href={"/good"} />;
   }
-  // todo: add welcome page
+  // todo: do a normal welcome page
   return (
     <SafeAreaView className="h-full">
       <ScrollView contentContainerStyle={{ height: "100%" }}>

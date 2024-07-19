@@ -5,31 +5,29 @@ import TitleAndSettings from "@/components/Header/TitleAndSettings";
 import HabbitCard from "@/components/HabbitCard/HabbitCard";
 import AddHabbitModal from "@/components/Modals/AddHabbitModal";
 import { Ionicons } from "@expo/vector-icons";
+import HabbitCardList from "@/components/HabbitCardList/HabbitCardList";
 
 const Good = () => {
   const setIsAddHabbitVisible = useModals(
     (state) => state.setIsAddHabbitVisible
   );
-
-  const goodHabbits = useGoodHabbits((state) => state.goodHabbits);
+  const setAddHabbitType = useModals((state) => state.setAddHabbitType);
 
   return (
     <SafeAreaView className="h-full">
       <TitleAndSettings title="Good habbits" />
-      <AddHabbitModal type="good" />
+      <AddHabbitModal/>
       <ScrollView
-        contentContainerStyle={{ height: "100%" }}
         scrollEnabled={true}
       >
-        <View className="w-full h-full flex justify-start items-center px-4">
-          {goodHabbits.map((goodHabbit) => (
-            <HabbitCard key={goodHabbit.id} habbit={goodHabbit} />
-          ))}
-        </View>
+        <HabbitCardList type="good" />
       </ScrollView>
       <Pressable
         className="absolute bottom-5 right-5 bg-primary rounded-full"
-        onPress={() => setIsAddHabbitVisible(true)}
+        onPress={() => {
+          setAddHabbitType("good");
+          setIsAddHabbitVisible(true)
+        }}
       >
         <Ionicons name="add-outline" size={48} color="black" />
       </Pressable>

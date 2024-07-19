@@ -7,14 +7,16 @@ import { useState } from "react";
 import { useModals } from "@/store/store";
 
 interface IAddHabbit {
-  type: string;
 }
 
-const AddHabbitModal: React.FC<IAddHabbit> = ({
-  type,
-}) => {
+const AddHabbitModal: React.FC<IAddHabbit> = () => {
+  
   const isAddHabbitVisible = useModals((state) => state.isAddHabbitVisible);
-  const setIsAddHabbitVisible = useModals((state) => state.setIsAddHabbitVisible);
+  const type = useModals((state) => state.AddHabbitType);
+
+  const setIsAddHabbitVisible = useModals(
+    (state) => state.setIsAddHabbitVisible
+  );
 
   const addHabbit =
     type === "bad"
@@ -35,6 +37,10 @@ const AddHabbitModal: React.FC<IAddHabbit> = ({
       date: new Date().toISOString(),
       changes: [],
     });
+
+    setIsAddHabbitVisible(false);
+    setTitle("");
+    setDescription("");
   };
 
   return (

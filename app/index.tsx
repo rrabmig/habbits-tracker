@@ -1,5 +1,5 @@
-import { Pressable, Text, Touchable, View } from "react-native";
-import { Redirect, router } from "expo-router";
+import { Pressable, Text, View } from "react-native";
+import { Redirect} from "expo-router";
 import { ScrollView } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useEffect, useState } from "react";

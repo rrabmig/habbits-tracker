@@ -175,6 +175,8 @@ export const useGoodHabbits = create<IGoodHabbits>((set) => ({
 interface IUseModals {
   isAddHabbitVisible: boolean;
   setIsAddHabbitVisible: (isAddHabbitVisible: boolean) => void;
+  AddHabbitType: string;
+  setAddHabbitType: (AddHabbitType: string) => void;
 
   isSettingsVisible: boolean;
   setIsSettingsVisible: (isSettingsVisible: boolean) => void;
@@ -182,10 +184,13 @@ interface IUseModals {
 
 export const useModals = create<IUseModals>((set) => ({
   isAddHabbitVisible: false,
+  AddHabbitType: "bad",
+  isSettingsVisible: false,
   setIsAddHabbitVisible: (isAddHabbitVisible) =>
     set(() => ({ isAddHabbitVisible })),
 
-  isSettingsVisible: false,
+  setAddHabbitType: (AddHabbitType) => set(() => ({ AddHabbitType })),
+
   setIsSettingsVisible: (isSettingsVisible) =>
     set(() => ({ isSettingsVisible })),
 }));

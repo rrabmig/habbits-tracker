@@ -7,6 +7,7 @@ import AddHabbitModal from "@/components/Modals/AddHabbitModal";
 
 import { useModals } from "@/store/store";
 import HabbitCardList from "@/components/HabbitCardList/HabbitCardList";
+import EditHabbitModal from "@/components/Modals/EditHabbitModal";
 
 const Bad = () => {
   const setIsAddHabbitVisible = useModals(
@@ -18,6 +19,7 @@ const Bad = () => {
     <SafeAreaView className="h-full">
       <TitleAndSettings title="Bad habbits" />
       <AddHabbitModal/>
+      <EditHabbitModal/>
       <ScrollView
         scrollEnabled={true}
       >

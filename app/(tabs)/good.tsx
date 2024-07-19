@@ -6,6 +6,7 @@ import HabbitCard from "@/components/HabbitCard/HabbitCard";
 import AddHabbitModal from "@/components/Modals/AddHabbitModal";
 import { Ionicons } from "@expo/vector-icons";
 import HabbitCardList from "@/components/HabbitCardList/HabbitCardList";
+import EditHabbitModal from "@/components/Modals/EditHabbitModal";
 
 const Good = () => {
   const setIsAddHabbitVisible = useModals(
@@ -17,6 +18,7 @@ const Good = () => {
     <SafeAreaView className="h-full">
       <TitleAndSettings title="Good habbits" />
       <AddHabbitModal/>
+      <EditHabbitModal/>
       <ScrollView
         scrollEnabled={true}
       >

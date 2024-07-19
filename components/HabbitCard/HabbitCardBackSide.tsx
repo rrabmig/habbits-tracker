@@ -3,6 +3,7 @@ import React from 'react'
 import { Habbit, useBadHabbits, useGoodHabbits } from '@/store/store'
 import { Ionicons } from '@expo/vector-icons'
 import { Pressable } from 'react-native'
+import { useModals } from '@/store/store'
 
 interface IHabbitCardBackSide {
     type: string
@@ -15,6 +16,18 @@ const HabbitCardBackSide: React.FC<IHabbitCardBackSide> = ({type, habbit}) => {
     type === "bad"
       ? useBadHabbits((state) => state.removeBadHabbit)
       : useGoodHabbits((state) => state.removeGoodHabbit);
+
+  const setIsEditHabbitVisible = useModals(
+    (state) => state.setIsEditHabbitVisible
+  )
+  const setAddHabbitType = useModals((state) => state.setAddHabbitType)
+  const setEditHabbitId = useModals((state) => state.setEditedHabbitId)
+
+  const openEditHabbitModal = () => {
+    setIsEditHabbitVisible(true);
+    setAddHabbitType(type);
+    setEditHabbitId(habbit.id);
+  }
   
     return (
     <View
@@ -24,9 +37,14 @@ const HabbitCardBackSide: React.FC<IHabbitCardBackSide> = ({type, habbit}) => {
           <Text className="text-xl">{habbit.title}</Text>
           <Text className="text-l w-70 pr-4">{habbit.description}</Text>
         </View>
-        <Pressable onPress={() => removeHabbit(habbit.id)}>
-            <Ionicons name="trash-outline" size={24} color="black" />
-        </Pressable>
+        <View className="flex-row justify-between items-center w-[30%]">
+          <Pressable onPress={openEditHabbitModal}>
+              <Ionicons name="pencil" size={24} color="black" />
+          </Pressable>
+          <Pressable onPress={() => removeHabbit(habbit.id)}>
+              <Ionicons name="trash-outline" size={24} color="black" />
+          </Pressable>
+        </View>
       </View>
   )
 }

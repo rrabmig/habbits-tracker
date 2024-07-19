@@ -13,7 +13,7 @@ const HabbitCardList: React.FC<IHabbitCardList> = ({type}) => {
   return (
     <View className="w-full h-full flex justify-start items-center px-4">
           {habbitsList.map((Habbit) => (
-            <HabbitCard key={Habbit.id} habbit={Habbit} type="bad"/>
+            <HabbitCard key={Habbit.id} habbit={Habbit} type={type}/>
           ))}
     </View>
   )

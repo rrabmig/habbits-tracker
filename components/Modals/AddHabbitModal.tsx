@@ -32,10 +32,8 @@ const AddHabbitModal: React.FC<IAddHabbit> = () => {
       id: Date.now(),
       title: title,
       description: description,
-      type: "count",
       count: 0,
       date: new Date().toISOString(),
-      changes: [],
     });
 
     setIsAddHabbitVisible(false);

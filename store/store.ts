@@ -27,10 +27,8 @@ export type Habbit = {
   id: number;
   title: string;
   description: string;
-  type: string;
   count: number;
   date: string;
-  changes: any[];
 };
 
 /*
@@ -58,6 +56,7 @@ export const useBadHabbits = create<IBadHabbits>((set) => ({
     set((state) => ({
       badHabbits: [...state.badHabbits, badHabbit],
     }));
+    console.log(badHabbit);
     addBadHabbit(badHabbit);
   },
   removeBadHabbit: (badHabbitId) => {

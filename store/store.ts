@@ -53,10 +53,10 @@ export const useBadHabbits = create<IBadHabbits>((set) => ({
     set({ badHabbits });
   },
   addBadHabbit: (badHabbit: Habbit) => {
-    set((state) => ({
+    set((state) => {
+      return ({
       badHabbits: [...state.badHabbits, badHabbit],
-    }));
-    console.log(badHabbit);
+    })});
     addBadHabbit(badHabbit);
   },
   removeBadHabbit: (badHabbitId) => {
@@ -172,43 +172,22 @@ export const useGoodHabbits = create<IGoodHabbits>((set) => ({
  */
 
 interface IUseModals {
-  isAddHabbitVisible: boolean;
-  setIsAddHabbitVisible: (isAddHabbitVisible: boolean) => void;
-
-  AddHabbitType: string;
-  setAddHabbitType: (AddHabbitType: string) => void;
-
-  isEditHabbitVisible: boolean;
-  setIsEditHabbitVisible: (isEditHabbitVisible: boolean) => void;
+  modalType: string;
+  isCurrentHabbitBad: boolean;
   editedHabbitId: number;
+  setModalType: (modalType: string) => void;
+  setIsCurrentHabbitBad: (isCurrentHabbitBad: boolean) => void;
   setEditedHabbitId: (editedHabbitId: number) => void;
-
-  isSettingsVisible: boolean;
-  setIsSettingsVisible: (isSettingsVisible: boolean) => void;
 }
 
 export const useModals = create<IUseModals>((set) => ({
-  isAddHabbitVisible: false,
-  AddHabbitType: "bad",
-
-  isEditHabbitVisible: false,
+  modalType: "", // settigs, addHabbit, editHabbit
+  isCurrentHabbitBad: false,
   editedHabbitId: 0,
-  setIsEditHabbitVisible(isEditHabbitVisible) {
-    set(() => ({ isEditHabbitVisible }));
-  },
-  setEditedHabbitId(editedHabbitId) {
-    set(() => ({ editedHabbitId }));
-  },
 
-  isSettingsVisible: false,
-
-  setIsAddHabbitVisible: (isAddHabbitVisible) =>
-    set(() => ({ isAddHabbitVisible })),
-
-  setAddHabbitType: (AddHabbitType) => set(() => ({ AddHabbitType })),
-
-  setIsSettingsVisible: (isSettingsVisible) =>
-    set(() => ({ isSettingsVisible })),
+  setModalType: (modalType) => set(() => ({ modalType })),
+  setIsCurrentHabbitBad: (isCurrentHabbitBad) => set(() => ({ isCurrentHabbitBad })),
+  setEditedHabbitId: (editedHabbitId) => set(() => ({ editedHabbitId })),
 }));
 
 /*

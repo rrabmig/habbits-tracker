@@ -7,19 +7,16 @@ import { useState } from "react";
 import { useModals } from "@/store/store";
 
 interface IAddHabbit {
+  visible: boolean;
+  closeModal: () => void;
 }
 
-const AddHabbitModal: React.FC<IAddHabbit> = () => {
-  
-  const isAddHabbitVisible = useModals((state) => state.isAddHabbitVisible);
-  const type = useModals((state) => state.AddHabbitType);
+const AddHabbitModal: React.FC<IAddHabbit> = ({ visible, closeModal }) => {
 
-  const setIsAddHabbitVisible = useModals(
-    (state) => state.setIsAddHabbitVisible
-  );
+  const isCurrentTypeBad = useModals((state) => state.isCurrentHabbitBad);
 
   const addHabbit =
-    type === "bad"
+    isCurrentTypeBad
       ? useBadHabbits((state) => state.addBadHabbit)
       : useGoodHabbits((state) => state.addGoodHabbit);
 
@@ -36,23 +33,21 @@ const AddHabbitModal: React.FC<IAddHabbit> = () => {
       date: new Date().toISOString(),
     });
 
-    setIsAddHabbitVisible(false);
+    closeModal();
     setTitle("");
     setDescription("");
   };
 
   return (
     <Modal
-      visible={isAddHabbitVisible}
+      visible={visible}
       animationType="fade"
       transparent={true}
-      onRequestClose={() => {
-        setIsAddHabbitVisible(false);
-      }}
+      onRequestClose={closeModal}
     >
       <View
         className="absolute h-full w-full bg-black/50 flex justify-center items-center px-2"
-        onTouchStart={() => setIsAddHabbitVisible(false)}
+        onTouchStart={closeModal}
       >
         <View
           className="bg-white rounded-xl w-full min-h-[50%] flex items-center px-4"
@@ -60,11 +55,11 @@ const AddHabbitModal: React.FC<IAddHabbit> = () => {
         >
           <Pressable
             className="absolute top-2 right-2"
-            onPress={() => setIsAddHabbitVisible(false)}
+            onPress={closeModal}
           >
             <Ionicons name="close-outline" size={24} color="black" />
           </Pressable>
-          <Text className="text-[30px]">Add new {type} Habbit</Text>
+          <Text className="text-[30px]">Add new {isCurrentTypeBad ? "Bad" : "Good"} Habbit</Text>
           <View className="w-full h-fit flex justify-start items-start">
             <Text className="text-xl">Title</Text>
             <TextInput

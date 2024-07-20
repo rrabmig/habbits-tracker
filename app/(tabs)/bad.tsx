@@ -2,38 +2,24 @@ import { View, Text, ScrollView, Pressable } from "react-native";
 import React from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import TitleAndSettings from "@/components/Header/TitleAndSettings";
-import { Ionicons } from "@expo/vector-icons";
-import AddHabbitModal from "@/components/Modals/AddHabbitModal";
-
-import { useModals } from "@/store/store";
 import HabbitCardList from "@/components/HabbitCardList/HabbitCardList";
-import EditHabbitModal from "@/components/Modals/EditHabbitModal";
+import Modal from "@/components/Modals/Modal";
+import AddHabbitButton from "@/components/Buttons/AddHabbitButton";
+import { useModals } from "@/store/store";
 
 const Bad = () => {
-  const setIsAddHabbitVisible = useModals(
-    (state) => state.setIsAddHabbitVisible
-  );
-  const setAddHabbitType = useModals((state) => state.setAddHabbitType);
 
   return (
     <SafeAreaView className="h-full">
+      
       <TitleAndSettings title="Bad habbits" />
-      <AddHabbitModal/>
-      <EditHabbitModal/>
+      <Modal />
       <ScrollView
         scrollEnabled={true}
       >
         <HabbitCardList type="bad" />
       </ScrollView>
-      <Pressable
-        className="absolute bottom-5 right-5 bg-primary rounded-full"
-        onPress={() => {
-          setIsAddHabbitVisible(true)
-          setAddHabbitType("bad")
-        }}
-      >
-        <Ionicons name="add-outline" size={48} color="black" />
-      </Pressable>
+      <AddHabbitButton type="bad"/>
     </SafeAreaView>
   );
 };

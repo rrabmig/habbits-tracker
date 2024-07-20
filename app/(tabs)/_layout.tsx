@@ -5,6 +5,7 @@ import { Ionicons } from "@expo/vector-icons";
 
 const TabsLayout: React.FC = () => {
   return (
+    <>
     <Tabs >
       <Tabs.Screen
         name="good"
@@ -49,6 +50,7 @@ const TabsLayout: React.FC = () => {
         }}
       />
     </Tabs>
+    </>
   );
 };
 

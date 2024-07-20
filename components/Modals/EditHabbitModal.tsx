@@ -6,31 +6,27 @@ import { Habbit, useBadHabbits, useGoodHabbits } from '@/store/store'
 import { useModals } from '@/store/store'
 
 interface IEditHabbitModal {
-    
+  closeModal: () => void
+  visible: boolean
 }
 
 
-const EditHabbitModal = () => {
-
-    const isEditHabbitVisible = useModals((state) => state.isEditHabbitVisible);
-    const setIsEditHabbitVisible = useModals((state) => state.setIsEditHabbitVisible);
+const EditHabbitModal: React.FC<IEditHabbitModal> = ({closeModal, visible}) => {
     
     return (
       <Modal
-        visible={isEditHabbitVisible}
+        visible={visible}
         animationType="fade"
         transparent={true}
-        onRequestClose={() => {
-          setIsEditHabbitVisible(false);
-        }}
+        onRequestClose={closeModal}
       >
         <View
           className="absolute h-full w-full bg-black/50 flex justify-center items-center px-2"
-          onTouchStart={() => setIsEditHabbitVisible(false)}
+          onTouchStart={closeModal}
         >
           <View
             className="bg-white rounded-xl w-full min-h-[50%] flex items-center px-4"
-            onTouchStart={(e) => e.stopPropagation()}
+            onTouchStart={closeModal}
           >
             <Text>Edit habbit</Text>
           </View>

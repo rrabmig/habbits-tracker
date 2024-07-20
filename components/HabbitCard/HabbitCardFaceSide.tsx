@@ -22,7 +22,7 @@ const HabbitCardFaceSide: React.FC<IHabbitCardFaceSide> = ({type, habbit}) => {
   
   return (
     <View
-        className="w-full min-h-fit flex-row  my-1 justify-between items-center border-b border-gray-300 py-4 px-4 rounded-xl bg-white"
+        className="w-full h-fit flex-row my-1 justify-between items-center border-b border-gray-300 py-4 px-4 rounded-xl bg-white"
       >
         <View className="flex-col justify-between items-start">
           <Text className="text-xl">{habbit.title}</Text>

@@ -12,26 +12,26 @@ interface IHabbitCardBackSide {
 
 const HabbitCardBackSide: React.FC<IHabbitCardBackSide> = ({type, habbit}) => {
 
+  const setModalType = useModals((state) => state.setModalType);
+  const setIsCurrentHabbitBad = useModals((state) => state.setIsCurrentHabbitBad);
+
   const removeHabbit =
     type === "bad"
       ? useBadHabbits((state) => state.removeBadHabbit)
       : useGoodHabbits((state) => state.removeGoodHabbit);
 
-  const setIsEditHabbitVisible = useModals(
-    (state) => state.setIsEditHabbitVisible
-  )
-  const setAddHabbitType = useModals((state) => state.setAddHabbitType)
+
   const setEditHabbitId = useModals((state) => state.setEditedHabbitId)
 
   const openEditHabbitModal = () => {
-    setIsEditHabbitVisible(true);
-    setAddHabbitType(type);
+    setModalType("editHabbit");
+    setIsCurrentHabbitBad(type === "bad");
     setEditHabbitId(habbit.id);
   }
   
     return (
     <View
-        className="w-full min-h-fit flex-row  my-1 justify-between items-center border-b border-gray-300 py-4 px-4 rounded-xl bg-gray-100"
+        className="w-full h-fit flex-row  my-1 justify-between items-center border-b border-gray-300 py-4 px-4 rounded-xl bg-gray-100"
       >
         <View className="flex-col justify-between items-start">
           <Text className="text-xl">{habbit.title}</Text>

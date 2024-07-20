@@ -9,22 +9,21 @@ interface ITitleAndSettings {
 }
 
 const TitleAndSettings: React.FC<ITitleAndSettings> = ({ title }) => {
-  let isSettingsVisible = useModals((state) => state.isSettingsVisible);
-  let setIsSettingsVisible = useModals((state) => state.setIsSettingsVisible);
+  const setModalType = useModals((state) => state.setModalType);
+  const modalType = useModals((state) => state.modalType);
 
   return (
     <>
       <View className="w-full flex-row justify-between items-center px-4 py-2">
         <Text className="text-2xl">{title}</Text>
-        <TouchableOpacity onPress={() => setIsSettingsVisible(true)}>
+        <TouchableOpacity onPress={() => setModalType("settings")}>
           <Ionicons
-            name={isSettingsVisible ? "settings" : "settings-outline"}
+            name={modalType === "settings" ? "settings" : "settings-outline"}
             size={24}
             color="black"
           />
         </TouchableOpacity>
       </View>
-      <SettingsModal />
     </>
   );
 };

@@ -24,13 +24,16 @@ const HabbitCard: React.FC<IHabbitCard> = ({ habbit, type }) => {
   };
 
   return (
-    <TouchableOpacity onLongPress={handleLongPress} activeOpacity={0.6}>
+    <TouchableOpacity 
+      onLongPress={handleLongPress} 
+      activeOpacity={0.6}
+      className="w-full h-fit flex-row my-1 py-1 px-4 rounded-xl"
+    >
       <FlipCard
-        style={{ width: "100%", height: "100%" }}
+        style={{ width: "100%", height: "100%"}}
         flipHorizontal={true}
         flipVertical={false}
         flip={longPress}
-        perspective={1000}
         useNativeDriver={true}
         clickable={false}
       >

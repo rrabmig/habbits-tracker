@@ -13,7 +13,6 @@ import {
 
 /**
  * Represents a Habbit object.
- *
  * @typedef {Object} Habbit
  * @property {number} id - The unique identifier of the Habbit.
  * @property {string} title - The title of the Habbit.
@@ -54,9 +53,10 @@ export const useBadHabbits = create<IBadHabbits>((set) => ({
   },
   addBadHabbit: (badHabbit: Habbit) => {
     set((state) => {
-      return ({
-      badHabbits: [...state.badHabbits, badHabbit],
-    })});
+      return {
+        badHabbits: [...state.badHabbits, badHabbit],
+      };
+    });
     addBadHabbit(badHabbit);
   },
   removeBadHabbit: (badHabbitId) => {
@@ -186,7 +186,8 @@ export const useModals = create<IUseModals>((set) => ({
   editedHabbitId: 0,
 
   setModalType: (modalType) => set(() => ({ modalType })),
-  setIsCurrentHabbitBad: (isCurrentHabbitBad) => set(() => ({ isCurrentHabbitBad })),
+  setIsCurrentHabbitBad: (isCurrentHabbitBad) =>
+    set(() => ({ isCurrentHabbitBad })),
   setEditedHabbitId: (editedHabbitId) => set(() => ({ editedHabbitId })),
 }));
 

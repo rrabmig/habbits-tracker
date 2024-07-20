@@ -12,6 +12,10 @@
    7.2. реализовать само отображение статистики
 6. Сделать что бы вместо путсого списка что то отображалось, побуждающее добавить привычку
 
+## ABOUT
+
+This is a fullstack app for tracking your habbits.
+
 # Welcome to your Expo app 👋
 
 This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).

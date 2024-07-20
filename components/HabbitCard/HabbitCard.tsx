@@ -1,14 +1,8 @@
-import {
-  View,
-  Text,
-  Pressable,
-  TouchableOpacity,
-} from "react-native";
+import { View, Text, Pressable, TouchableOpacity } from "react-native";
 import React from "react";
 import { useState } from "react";
-import { Ionicons } from "@expo/vector-icons";
-import { Habbit, useBadHabbits, useGoodHabbits } from "@/store/store";
-import FlipCard from 'react-native-flip-card';
+import { Habbit } from "@/store/store";
+import FlipCard from "react-native-flip-card";
 import HabbitCardFaceSide from "./HabbitCardFaceSide";
 import HabbitCardBackSide from "./HabbitCardBackSide";
 
@@ -24,21 +18,21 @@ const HabbitCard: React.FC<IHabbitCard> = ({ habbit, type }) => {
   };
 
   return (
-    <TouchableOpacity 
-      onLongPress={handleLongPress} 
+    <TouchableOpacity
+      onLongPress={handleLongPress}
       activeOpacity={0.6}
       className="w-full h-fit flex-row my-1 py-1 px-4 rounded-xl"
     >
       <FlipCard
-        style={{ width: "100%", height: "100%"}}
+        style={{ width: "100%", height: "100%" }}
         flipHorizontal={true}
         flipVertical={false}
         flip={longPress}
         useNativeDriver={true}
         clickable={false}
       >
-        <HabbitCardFaceSide type={type} habbit={habbit}/>
-        <HabbitCardBackSide type={type} habbit={habbit}/>
+        <HabbitCardFaceSide type={type} habbit={habbit} />
+        <HabbitCardBackSide type={type} habbit={habbit} />
       </FlipCard>
     </TouchableOpacity>
   );

@@ -8,18 +8,14 @@ import AddHabbitButton from "@/components/Buttons/AddHabbitButton";
 import { useModals } from "@/store/store";
 
 const Bad = () => {
-
   return (
     <SafeAreaView className="h-full">
-      
       <TitleAndSettings title="Bad habbits" />
       <Modal />
-      <ScrollView
-        scrollEnabled={true}
-      >
+      <ScrollView scrollEnabled={true}>
         <HabbitCardList type="bad" />
       </ScrollView>
-      <AddHabbitButton type="bad"/>
+      <AddHabbitButton type="bad" />
     </SafeAreaView>
   );
 };

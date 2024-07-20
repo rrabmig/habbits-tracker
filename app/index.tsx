@@ -1,8 +1,7 @@
 import { Pressable, Text, View } from "react-native";
-import { Redirect} from "expo-router";
+import { Redirect } from "expo-router";
 import { ScrollView } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { useEffect, useState } from "react";
 import { useUserInfo } from "@/store/store";
 
 export default function WelcomePage() {

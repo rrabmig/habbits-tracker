@@ -12,13 +12,11 @@ interface IAddHabbit {
 }
 
 const AddHabbitModal: React.FC<IAddHabbit> = ({ visible, closeModal }) => {
-
   const isCurrentTypeBad = useModals((state) => state.isCurrentHabbitBad);
 
-  const addHabbit =
-    isCurrentTypeBad
-      ? useBadHabbits((state) => state.addBadHabbit)
-      : useGoodHabbits((state) => state.addGoodHabbit);
+  const addHabbit = isCurrentTypeBad
+    ? useBadHabbits((state) => state.addBadHabbit)
+    : useGoodHabbits((state) => state.addGoodHabbit);
 
   const [title, setTitle] = useState<string>("");
   const [description, setDescription] = useState<string>("");
@@ -53,13 +51,12 @@ const AddHabbitModal: React.FC<IAddHabbit> = ({ visible, closeModal }) => {
           className="bg-white rounded-xl w-full min-h-[50%] flex items-center px-4"
           onTouchStart={(e) => e.stopPropagation()}
         >
-          <Pressable
-            className="absolute top-2 right-2"
-            onPress={closeModal}
-          >
+          <Pressable className="absolute top-2 right-2" onPress={closeModal}>
             <Ionicons name="close-outline" size={24} color="black" />
           </Pressable>
-          <Text className="text-[30px]">Add new {isCurrentTypeBad ? "Bad" : "Good"} Habbit</Text>
+          <Text className="text-[30px]">
+            Add new {isCurrentTypeBad ? "Bad" : "Good"} Habbit
+          </Text>
           <View className="w-full h-fit flex justify-start items-start">
             <Text className="text-xl">Title</Text>
             <TextInput

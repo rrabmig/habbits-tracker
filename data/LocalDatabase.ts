@@ -1,7 +1,7 @@
 // SQLite managment
 import { Habbit } from "@/store/store";
 import * as SQLite from "expo-sqlite";
-
+import { editedHabbitData } from "@/store/store";
 export async function createTables() {
   const db = await SQLite.openDatabaseAsync("habbits-tracker.db");
 
@@ -141,6 +141,45 @@ export async function decreaseGoodHabbitCount(goodHabbitId: number) {
         UPDATE good_habbits
         SET count = MAX(0, count - 1)
         WHERE id = ${goodHabbitId}
+        `
+  );
+}
+
+export async function selectBadHabbitById(badHabbitId: number): Promise<Habbit> {
+  const db = await SQLite.openDatabaseAsync("habbits-tracker.db");
+  const result: Habbit[] = await db.getAllAsync(
+    `SELECT * FROM bad_habbits WHERE id = ${badHabbitId}`
+  );
+  return result[0];
+}
+
+export async function selectGoodHabbitById(goodHabbitId: number): Promise<Habbit> {
+  const db = await SQLite.openDatabaseAsync("habbits-tracker.db");
+  const result: Habbit[] = await db.getAllAsync(
+    `SELECT * FROM good_habbits WHERE id = ${goodHabbitId}`
+  );
+  return result[0];
+}
+
+
+export async function editGoodHabbit(editedData: editedHabbitData): Promise<void> {
+  const db = await SQLite.openDatabaseAsync("habbits-tracker.db");
+  await db.runAsync(
+    `
+        UPDATE good_habbits
+        SET title = '${editedData.title}', description = '${editedData.description}', count = ${editedData.count}'
+        WHERE id = ${editedData.id}
+        `
+  );
+}
+
+export async function editBadHabbit(editedData: editedHabbitData): Promise<void> {
+  const db = await SQLite.openDatabaseAsync("habbits-tracker.db");
+  await db.runAsync(
+    `
+        UPDATE bad_habbits
+        SET title = '${editedData.title}', description = '${editedData.description}', count = ${editedData.count}'
+        WHERE id = ${editedData.id}
         `
   );
 }

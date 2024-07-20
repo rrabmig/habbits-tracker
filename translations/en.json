@@ -1,0 +1,24 @@
+{
+    "index": {
+        "welcome": "Welcome!!!"
+    },
+    "modals": {
+        "settings": {
+            "title": "Settings",
+            "language": "Language",
+            "theme": "Theme"
+        },
+        "addHabbit": {
+            "addHabbit": "Add Habbit",
+            "title": "Title",
+            "description": "Description",
+            "add": "Add"
+        }, 
+        "editHabbit": {
+            "editHabbit": "Edit Habbit",
+            "title": "New title",
+            "description": "New description",
+            "done": "Done"
+        }
+    }
+}

@@ -9,6 +9,8 @@ import {
   decreaseGoodHabbitCount,
   increaseGoodHabbitCount,
   removeGoodHabbit,
+  editBadHabbit,
+  editGoodHabbit,
 } from "@/data/LocalDatabase";
 
 /**
@@ -30,6 +32,14 @@ export type Habbit = {
   date: string;
 };
 
+export type editedHabbitData = {
+  id: number;
+  title: string;
+  description: string;
+  count: number;
+};
+
+
 /*
  * The global state for list of users bad habbits.
  *
@@ -44,6 +54,7 @@ interface IBadHabbits {
   removeBadHabbit: (badHabbitId: number) => void;
   increaseBadHabbitCount: (badHabbitId: number) => void;
   decreaseBadHabbitCount: (badHabbitId: number) => void;
+  editBadHabbit: (badHabbit: editedHabbitData) => void;
 }
 
 export const useBadHabbits = create<IBadHabbits>((set) => ({
@@ -96,6 +107,22 @@ export const useBadHabbits = create<IBadHabbits>((set) => ({
       }),
     }));
   },
+  editBadHabbit: (editedData: editedHabbitData) => {
+    set((state) => ({
+      badHabbits: state.badHabbits.map((badHabbit) => {
+        if (badHabbit.id === editedData.id) {
+          return {
+            ...badHabbit,
+            title: editedData.title,
+            description: editedData.description,
+            count: editedData.count,
+          };
+        }
+        return badHabbit;
+      }),
+    }));
+    editBadHabbit(editedData);
+  },
 }));
 
 /*
@@ -113,6 +140,7 @@ interface IGoodHabbits {
   removeGoodHabbit: (goodHabbitId: number) => void;
   increaseGoodHabbitCount: (goodHabbitId: number) => void;
   decreaseGoodHabbitCount: (goodHabbitId: number) => void;
+  editGoodHabbit: (goodHabbit: editedHabbitData) => void;
 }
 
 export const useGoodHabbits = create<IGoodHabbits>((set) => ({
@@ -161,6 +189,22 @@ export const useGoodHabbits = create<IGoodHabbits>((set) => ({
       }),
     }));
     decreaseGoodHabbitCount(goodHabbitId);
+  },
+  editGoodHabbit: (editedData: editedHabbitData) => {
+    set((state) => ({
+      goodHabbits: state.goodHabbits.map((goodHabbit) => {
+        if (goodHabbit.id === editedData.id) {
+          return {
+            ...goodHabbit,
+            title: editedData.title,
+            description: editedData.description,
+            count: editedData.count,
+          };
+        }
+        return goodHabbit;
+      }),
+    }));
+    editGoodHabbit(editedData);
   },
 }));
 

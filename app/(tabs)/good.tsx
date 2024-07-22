@@ -1,5 +1,4 @@
-import { ScrollView, View } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
+import { View } from "react-native";
 import React from "react";
 import HabbitCardList from "@/components/HabbitCardList/HabbitCardList";
 import AddHabbitButton from "@/components/Buttons/AddHabbitButton";

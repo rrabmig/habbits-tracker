@@ -1,8 +1,7 @@
 import { View, Text, Pressable, Modal, TextInput } from "react-native";
 import React, { useEffect } from "react";
 import { useState } from "react";
-import { Ionicons } from "@expo/vector-icons";
-import { editedHabbitData, Habbit, useBadHabbits, useGoodHabbits } from "@/store/store";
+import { editedHabbitData, useBadHabbits, useGoodHabbits } from "@/store/store";
 import { useModals } from "@/store/store";
 import { selectBadHabbitById, selectGoodHabbitById } from "@/data/LocalDatabase";
 import Loader from "../Loaders/Loader";

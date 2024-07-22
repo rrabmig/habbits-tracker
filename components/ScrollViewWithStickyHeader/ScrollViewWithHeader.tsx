@@ -28,7 +28,7 @@ const ScrollViewWithHeader: React.FC<IScrollViewWithHeader> = ({
 }) => {
   const [isTitleSticky, setIsTitleSticky] = useState(false);
 
-  let BG
+  let BG;
   switch (type) {
     case "good":
       BG = require("../../assets/images/backgrounds/green.jpg");
@@ -64,9 +64,7 @@ const ScrollViewWithHeader: React.FC<IScrollViewWithHeader> = ({
         />
       )}
 
-      <ScrollView
-        onScroll={handleScroll}
-      >
+      <ScrollView onScroll={handleScroll}>
         <ImageBackground
           source={BG}
           style={{
@@ -104,5 +102,3 @@ const ScrollViewWithHeader: React.FC<IScrollViewWithHeader> = ({
 };
 
 export default ScrollViewWithHeader;
-
-const styles = StyleSheet.create({});

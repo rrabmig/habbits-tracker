@@ -21,7 +21,7 @@ const TitleAndSettings: React.FC<ITitleAndSettings> = ({
   const setModalType = useModals((state) => state.setModalType);
   const modalType = useModals((state) => state.modalType);
 
-  let BG
+  let BG;
   switch (type) {
     case "good":
       BG = require("../../assets/images/backgrounds/green.jpg");
@@ -35,23 +35,20 @@ const TitleAndSettings: React.FC<ITitleAndSettings> = ({
   }
 
   return (
-   
-      <ImageBackground
-
-        source={BG}
+    <ImageBackground
+      source={BG}
+      style={{
+        position: sticky ? "absolute" : "relative",
+        top: sticky ? -(maxHeight - minHeight) : 0,
+        width: "100%",
+        height: maxHeight,
+        justifyContent: "flex-end",
+        zIndex: 2,
+      }}
+      resizeMode="cover"
+    >
+      <View
         style={{
-          position: sticky ? "absolute" : "relative",
-          top: sticky ? -(maxHeight - minHeight): 0,
-          width: "100%", 
-          height: maxHeight, 
-          justifyContent: "flex-end",
-          zIndex: 2,
-        }}
-        resizeMode="cover"
-
-      >
-         <View
-          style={{
           width: "100%",
           height: minHeight,
           flexDirection: "row",
@@ -60,17 +57,16 @@ const TitleAndSettings: React.FC<ITitleAndSettings> = ({
           zIndex: 1,
         }}
       >
-      <Text className="text-2xl text-white z-0">{title}</Text>
-      <TouchableOpacity onPress={() => setModalType("settings")}>
-        <Ionicons
-          name={modalType === "settings" ? "settings" : "settings-outline"}
-          size={24}
-          color="white"
-        />
-      </TouchableOpacity>
+        <Text className="text-2xl text-white z-0">{title}</Text>
+        <TouchableOpacity onPress={() => setModalType("settings")}>
+          <Ionicons
+            name={modalType === "settings" ? "settings" : "settings-outline"}
+            size={24}
+            color="white"
+          />
+        </TouchableOpacity>
       </View>
-      </ImageBackground>
-    
+    </ImageBackground>
   );
 };
 

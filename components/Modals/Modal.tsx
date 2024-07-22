@@ -1,6 +1,5 @@
 import React from "react";
 import { useModals } from "@/store/store";
-
 import AddHabbitModal from "./AddHabbitModal";
 import EditHabbitModal from "./EditHabbitModal";
 import SettingsModal from "./SettingsModal";

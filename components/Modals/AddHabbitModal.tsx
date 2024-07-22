@@ -1,7 +1,6 @@
 import { View, Text, Modal, Pressable, TextInput } from "react-native";
 import React from "react";
 import { Ionicons } from "@expo/vector-icons";
-
 import { useBadHabbits, useGoodHabbits } from "@/store/store";
 import { useState } from "react";
 import { useModals } from "@/store/store";

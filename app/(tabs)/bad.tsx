@@ -1,21 +1,21 @@
-import {ScrollView} from "react-native";
+import {ScrollView, View} from "react-native";
 import React from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import TitleAndSettings from "@/components/Header/TitleAndSettings";
 import HabbitCardList from "@/components/HabbitCardList/HabbitCardList";
-import Modal from "@/components/Modals/Modal";
+
 import AddHabbitButton from "@/components/Buttons/AddHabbitButton";
+import ScrollViewWithHeader from "@/components/ScrollViewWithStickyHeader/ScrollViewWithHeader";
+
 
 const Bad = () => {
   return (
-    <SafeAreaView className="h-full">
-      <TitleAndSettings title="Bad habbits" />
-      <Modal />
-      <ScrollView scrollEnabled={true}>
+    <View className="h-full">
+      <ScrollViewWithHeader title="Bad habbits" type="bad">
         <HabbitCardList type="bad" />
-      </ScrollView>
+      </ScrollViewWithHeader>
       <AddHabbitButton type="bad" />
-    </SafeAreaView>
+    </View>
   );
 };
 

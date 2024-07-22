@@ -13,8 +13,8 @@ const HabbitCardList: React.FC<IHabbitCardList> = ({ type }) => {
       ? useGoodHabbits((state) => state.goodHabbits)
       : useBadHabbits((state) => state.badHabbits);
   return (
-    <ScrollView
-      contentContainerStyle={{
+    <View
+      style={{
         width: "100%",
         height: "100%",
         alignItems: "center",
@@ -25,7 +25,7 @@ const HabbitCardList: React.FC<IHabbitCardList> = ({ type }) => {
       {habbitsList.map((habbit) => (
         <HabbitCard key={habbit.id} habbit={habbit} type={type} />
       ))}
-    </ScrollView>
+    </View>
   );
 };
 

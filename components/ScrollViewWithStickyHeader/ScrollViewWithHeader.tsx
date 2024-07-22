@@ -28,9 +28,18 @@ const ScrollViewWithHeader: React.FC<IScrollViewWithHeader> = ({
 }) => {
   const [isTitleSticky, setIsTitleSticky] = useState(false);
 
-  const greenBG = require("../../assets/images/backgrounds/green.jpg");
-  const redBG = require("../../assets/images/backgrounds/red.jpg");
-  const BG = type === "good" ? greenBG : redBG;
+  let BG
+  switch (type) {
+    case "good":
+      BG = require("../../assets/images/backgrounds/green.jpg");
+      break;
+    case "bad":
+      BG = require("../../assets/images/backgrounds/red.jpg");
+      break;
+    case "stats":
+      BG = require("../../assets/images/backgrounds/stats.jpg");
+      break;
+  }
 
   const handleScroll = (
     event: NativeSyntheticEvent<NativeScrollEvent>

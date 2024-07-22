@@ -21,9 +21,18 @@ const TitleAndSettings: React.FC<ITitleAndSettings> = ({
   const setModalType = useModals((state) => state.setModalType);
   const modalType = useModals((state) => state.modalType);
 
-  const greenBG = require("../../assets/images/backgrounds/green.jpg");
-  const redBG = require("../../assets/images/backgrounds/red.jpg");
-  const BG = type === "good" ? greenBG : redBG;
+  let BG
+  switch (type) {
+    case "good":
+      BG = require("../../assets/images/backgrounds/green.jpg");
+      break;
+    case "bad":
+      BG = require("../../assets/images/backgrounds/red.jpg");
+      break;
+    case "stats":
+      BG = require("../../assets/images/backgrounds/stats.jpg");
+      break;
+  }
 
   return (
    

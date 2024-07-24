@@ -4,8 +4,9 @@ import React from "react";
 import { useBadHabbits, useGoodHabbits } from "@/store/store";
 import { hardReset } from "@/data/hardReset";
 import { TouchableOpacity } from "react-native";
-
+import { router } from "expo-router";
 import { getBadHabbits, getGoodHabbits } from "@/data/LocalDatabase";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 interface ISettings {
   closeModal: () => void;
@@ -27,6 +28,12 @@ const SettingsModal: React.FC<ISettings> = ({ closeModal, visible }) => {
       .then(() => {
         closeModal();
       });
+  };
+
+  function goToWelcomePage(){
+    closeModal();
+    AsyncStorage.setItem("isWelcomed", "false");
+    router.navigate("/");
   };
 
   return (
@@ -58,6 +65,12 @@ const SettingsModal: React.FC<ISettings> = ({ closeModal, visible }) => {
           >
             <Text className="text-[20px]">HARD RESET</Text>
           </TouchableOpacity>
+          <TouchableOpacity 
+            onPress={goToWelcomePage}
+            className="self-center bg-red-500 rounded-full p-2">
+            <Text className="text-[20px]">See welcome page again</Text>
+          </TouchableOpacity>
+          <Text className="text-[20px]">Version 1.0.0</Text>
         </View>
       </View>
     </Modal>

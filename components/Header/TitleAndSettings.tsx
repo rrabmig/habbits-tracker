@@ -55,6 +55,8 @@ const TitleAndSettings: React.FC<ITitleAndSettings> = ({
           justifyContent: "space-between",
           alignItems: "flex-end",
           zIndex: 1,
+          paddingHorizontal: 10,
+          paddingBottom: 10,
         }}
       >
         <Text className="text-2xl text-white z-0">{title}</Text>

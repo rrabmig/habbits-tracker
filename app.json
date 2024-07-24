@@ -10,10 +10,15 @@
     "splash": {
       "image": "./assets/images/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "##d6876d"
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "splash": {
+        "image": "./assets/images/splash.png",
+        "backgroundColor": "#d6876d",
+        "resizeMode": "contain"
+      }
     },
     "android": {
       "adaptiveIcon": {
